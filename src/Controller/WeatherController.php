@@ -36,8 +36,15 @@ class WeatherController extends AbstractController
             $token = $requestData['token'];
             $city = $requestData['city'];
 
-            $returnData = ['message' => 'success'];
-            return new JsonResponse($returnData);
+
+            $url = 'http://api.openweathermap.org/data/2.5/weather?q=';
+
+            $response = $this->client->request(
+                'GET',
+                $url . $city . '&appid=' . $token
+            );
+
+            return new JsonResponse($response->getContent());
         }
 
         return $this->render('main/home.html.twig', [

@@ -17,7 +17,8 @@ $(document).ready(() => {
             contentType: false,
             cache: false,
             success: function (data) {
-             console.log(data.message);
+                const $data = JSON.parse(data);
+                drawWeather($data);
             },
             error: function (jqXHR){
                 $('.container')
@@ -25,4 +26,12 @@ $(document).ready(() => {
             }
         });
     });
+
+    function drawWeather(data) {
+        const Celsius = Math.round(parseFloat(data.main.temp)-273.15);
+
+        document.getElementById('description').innerHTML = data.weather[0].description;
+        document.getElementById('temp').innerHTML = Celsius + '&deg;';
+        document.getElementById('location').innerHTML = data.name;
+    }
 });
