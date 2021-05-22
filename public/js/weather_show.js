@@ -47,7 +47,7 @@ $(document).ready(() => {
                         <h3 id="humidity" class="card-text">${description}</h3>
                         <h1 id="temp" class="card-text text-secondary font-weight-bold ml-2">${Celsius}</h1>
                         <div id="feels-like" class="card-text">Feels like ${CelsiusFeelsLike}</div>
-                        <div id="humidity" class="card-text">${humidity}</div>
+                        <div id="humidity" class="card-text">Humidity ${humidity}</div>
                     </div>
                 </div>
             </div>
