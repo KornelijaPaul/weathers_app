@@ -1,12 +1,11 @@
 $(document).ready(() => {
+    const $tabContainer = document.getElementById('city-tabs');
     const $container = $('.container');
     const $formWrapper = $container.find('.form-wrapper');
-    console.log($formWrapper);
 
     $formWrapper.on('submit', function (event) {
         event.preventDefault();
         const $form = $(event.currentTarget)[0];
-        console.log($form);
 
         $.ajax({
             url: '/',
@@ -28,10 +27,32 @@ $(document).ready(() => {
     });
 
     function drawWeather(data) {
-        const Celsius = Math.round(parseFloat(data.main.temp)-273.15);
+        const Celsius = Math.round(parseFloat(data.main.temp)-273.15) + '&deg;';
+        const CelsiusFeelsLike = Math.round(parseFloat(data.main.feels_like)-273.15) + '&deg;';
+        const description = data.weather[0].description;
+        const name = data.name;
+        const humidity = data.main.humidity + '%';
 
-        document.getElementById('description').innerHTML = data.weather[0].description;
-        document.getElementById('temp').innerHTML = Celsius + '&deg;';
-        document.getElementById('location').innerHTML = data.name;
+        document.getElementsByClassName('city-list')[0].insertAdjacentHTML('beforeend', `
+         <li class="btn btn-lg btn-success ml-3 mt-3">
+                <a id="city-name" data-toggle="pill" href="#${name}" class="text-light">${name}</a>
+            </li>
+        `);
+
+        document.getElementsByClassName('info')[0].insertAdjacentHTML('afterbegin',`
+        <div id="${name}" class="tab-pane ml-5 text-center">
+                <div class="card mx-auto text-white bg-dark mb-3" style="width: 500px;">
+                    <div id="description" class="card-header font-weight-bold">${name}</div>
+                    <div class="card-body">
+                        <h3 id="humidity" class="card-text">${description}</h3>
+                        <h1 id="temp" class="card-text text-secondary font-weight-bold ml-2">${Celsius}</h1>
+                        <div id="feels-like" class="card-text">Feels like ${CelsiusFeelsLike}</div>
+                        <div id="humidity" class="card-text">${humidity}</div>
+                    </div>
+                </div>
+            </div>
+        `);
+
+        $tabContainer.classList.remove("d-none");
     }
 });
