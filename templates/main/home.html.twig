@@ -5,8 +5,11 @@
         Curious what's the weather today?
     </div>
     {{ include('form/_weather.html.twig') }}
+    <div id="city-tabs" class="d-none ml-5 mr-2 mt-5">
+        <ul class="nav nav-pills city-list"></ul>
 
-    {{ include('view/city_weather.html.twig') }}
+        <div class="info tab-content ml-5 mt-3 mt-3"></div>
+    </div>
 
 {% endblock %}
 
