@@ -15,10 +15,12 @@ class WeatherSearchFormType extends AbstractType
             ->add('token', TextType::class, [
                 'required' => true,
                 'label' => false,
+                'attr' => ['maxlength' => 50],
             ])
             ->add('city', TextType::class, [
                 'required' => true,
                 'label' => false,
+                'attr' => ['maxlength' => 85],
             ]);
     }
 }
