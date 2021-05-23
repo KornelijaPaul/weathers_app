@@ -14,10 +14,11 @@ class WeatherSearchFormType extends AbstractType
         $builder
             ->add('token', TextType::class, [
                 'required' => true,
-                'label' => 'Token',
+                'label' => false,
             ])
             ->add('city', TextType::class, [
                 'required' => true,
+                'label' => false,
             ]);
     }
 }

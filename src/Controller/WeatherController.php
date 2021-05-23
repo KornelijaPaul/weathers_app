@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
@@ -44,7 +45,11 @@ class WeatherController extends AbstractController
                 $url . $city . '&appid=' . $token
             );
 
-            return new JsonResponse($response->getContent());
+            if (200 !== $response->getStatusCode()) {
+                throw new NotFoundHttpException();
+            } else {
+                return new JsonResponse($response->getContent());
+            }
         }
 
         return $this->render('main/home.html.twig', [
