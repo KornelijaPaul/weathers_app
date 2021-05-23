@@ -3,6 +3,8 @@ $(document).ready(() => {
     const $container = $('.container');
     const $formWrapper = $container.find('.form-wrapper');
 
+    let cities = [];
+
     $formWrapper.on('submit', function (event) {
         event.preventDefault();
         const $form = $(event.currentTarget)[0];
@@ -17,7 +19,11 @@ $(document).ready(() => {
             cache: false,
             success: function (data) {
                 const $data = JSON.parse(data);
-                drawWeather($data);
+
+                if (!cities.includes($data.name)){
+                    cities.push($data.name);
+                    drawWeather($data);
+                }
             },
             error: function (jqXHR){
                 $('.container')
