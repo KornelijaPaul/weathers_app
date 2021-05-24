@@ -28,9 +28,15 @@ class WeatherController extends AbstractController
      */
     public function showAction(Request $request): Response
     {
+        if(!$request->isXmlHttpRequest()) {
+            $this->redirectToRoute('app_home');
+        }
+
         $form = $this->createForm(WeatherSearchFormType::class);
 
-        if ($request->isXmlHttpRequest()) {
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
             $request = $request->request->all();
             $requestData = $request['weather_search_form'];
 
