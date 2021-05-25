@@ -16,3 +16,4 @@
 ###< symfony/phpunit-bridge ###
 
 /.idea
+debug.log $ git rm --cached .env rm .env $ git commit -m Start ignoring .env
