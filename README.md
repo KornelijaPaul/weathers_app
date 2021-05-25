@@ -9,6 +9,8 @@ If you've just downloaded the code, congratulations!!
 
 To get it working, follow these steps:
 
+Copy .env_dev file update DATABASE_URL and save as .env in the root of project.
+
 **Download Composer dependencies**
 
 Make sure you have [Composer installed](https://getcomposer.org/download/)
